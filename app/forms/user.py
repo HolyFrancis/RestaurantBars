@@ -13,3 +13,12 @@ class UserForm(ModelForm):
             "email",
             "password",
         ]
+        
+
+class UserLoginForm(ModelForm):
+    class Meta:
+        model = MyUser
+        fields = [
+            "username",
+            "password",
+        ]
