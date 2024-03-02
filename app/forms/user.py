@@ -1,9 +1,12 @@
-from django.forms import ModelForm
+from typing import Any
+from django import forms
 
 from app.models import MyUser
 
 
-class UserForm(ModelForm):
+class UserForm(forms.ModelForm):
+    password = forms.CharField(max_length=30, required=True, widget=forms.PasswordInput())
+    password_confirm = forms.CharField( max_length=30, required=True, widget=forms.PasswordInput())
     class Meta:
         model = MyUser
         fields = [
@@ -12,10 +15,11 @@ class UserForm(ModelForm):
             "username",
             "email",
             "password",
+            "password_confirm",
         ]
-        
+   
 
-class UserLoginForm(ModelForm):
+class UserLoginForm(forms.ModelForm):
     class Meta:
         model = MyUser
         fields = [
