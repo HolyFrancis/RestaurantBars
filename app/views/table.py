@@ -31,4 +31,18 @@ class PlaceView(ListView):
     model = Place
     context_object_name = "places"
     
+
+class PlaceCreateView(View):
+    template_name = "table/place_create.html"
+    form_class = PlaceForm
     
+    def post(self, request):
+        if request.method =="POST":
+            form = PlaceForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Place created succesfully")
+            else:
+                messages.error(request, "oops something went wrong while creating")
+        form = self.form_class
+        return render(request, self.template_name, {"form":form})
